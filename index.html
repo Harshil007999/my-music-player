@@ -1,53 +1,37 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.4">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus Project: Music Player</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Syllabus Project: Music Player&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="style.css"&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;main class="player-container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;header class="song-info"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2 id="title"&gt;Select a Song&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3 id="artist"&gt;Local Audio Player&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="progress-container" id="progress-container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="progress" id="progress"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="controls"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="prev" class="action-btn"&gt;Prev&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="play" class="action-btn main-btn"&gt;Play&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="next" class="action-btn"&gt;Next&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="volume-section"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label for="volume-slider"&gt;Vol&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="range" id="volume-slider" min="0" max="100" value="80"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;audio id="audio" src=""&gt;&lt;/audio&gt;</p>
-<p class="p1">&lt;/main&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script src="script.js"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+<main class="player-container">
+    <header class="song-info">
+        <h2 id="title">Select a Song</h2>
+        <h3 id="artist">Local Audio Player</h3>
+    </header>
+
+    <div class="progress-container" id="progress-container">
+        <div class="progress" id="progress"></div>
+    </div>
+
+    <div class="controls">
+        <button id="prev" class="action-btn">Prev</button>
+        <button id="play" class="action-btn main-btn">Play</button>
+        <button id="next" class="action-btn">Next</button>
+    </div>
+
+    <div class="volume-section">
+        <label for="volume-slider">Vol</label>
+        <input type="range" id="volume-slider" min="0" max="100" value="80">
+    </div>
+
+    <audio id="audio" src=""></audio>
+</main>
+
+<script src="script.js"></script>
 </body>
 </html>
