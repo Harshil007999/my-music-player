@@ -1,78 +1,76 @@
-:root {
-    --primary: #1db954; 
-    --dark-bg: #121212;
-    --card-bg: #282828;
+const audio = document.getElementById('audio');
+const playBtn = document.getElementById('play');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+const progress = document.getElementById('progress');
+const progressContainer = document.getElementById('progress-container');
+const title = document.getElementById('title');
+const volumeSlider = document.getElementById('volume-slider');
+
+// 1. Song List - CHANGE THIS NAME to match your uploaded .mp3 file exactly!
+const songs = ['Music_Track_1']; 
+let songIndex = 0;
+
+// 2. Load the initial song
+function loadSong(song) {
+    title.innerText = song;
+    audio.src = `${song}.mp3`; 
 }
 
-body {
-    background-color: var(--dark-bg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    color: white;
+// 3. Play/Pause Function
+function togglePlay() {
+    if (audio.paused) {
+        audio.play();
+        playBtn.innerText = 'Pause';
+    } else {
+        audio.pause();
+        playBtn.innerText = 'Play';
+    }
 }
 
-.player-container {
-    background-color: var(--card-bg);
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-    width: 320px;
-    text-align: center;
+// 4. Update Progress Bar
+function updateProgress(e) {
+    const { duration, currentTime } = e.srcElement;
+    if (duration) {
+        const progressPercent = (currentTime / duration) * 100;
+        progress.style.width = `${progressPercent}%`;
+    }
 }
 
-.song-info h2 { margin-bottom: 5px; }
-.song-info h3 { color: #b3b3b3; font-weight: normal; font-size: 14px; }
-
-.progress-container {
-    background: #4d4d4d;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 25px 0;
-    height: 4px;
-    width: 100%;
+// 5. Click on progress bar to skip
+function setProgress(e) {
+    const width = this.clientWidth;
+    const clickX = e.offsetX;
+    const duration = audio.duration;
+    audio.currentTime = (clickX / width) * duration;
 }
 
-.progress {
-    background-color: var(--primary);
-    border-radius: 5px;
-    height: 100%;
-    width: 0%; 
-    transition: width 0.1s linear;
+// 6. Volume Control
+volumeSlider.addEventListener('input', (e) => {
+    audio.volume = e.target.value / 100;
+});
+
+// 7. Navigation
+function nextSong() {
+    songIndex = (songIndex + 1) % songs.length;
+    loadSong(songs[songIndex]);
+    audio.play();
+    playBtn.innerText = 'Pause';
 }
 
-.controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+function prevSong() {
+    songIndex = (songIndex - 1 + songs.length) % songs.length;
+    loadSong(songs[songIndex]);
+    audio.play();
+    playBtn.innerText = 'Pause';
 }
 
-.action-btn {
-    background: none;
-    border: none;
-    color: #b3b3b3;
-    font-size: 16px;
-    cursor: pointer;
-    transition: transform 0.2s, color 0.2s;
-}
+// Event Listeners
+playBtn.addEventListener('click', togglePlay);
+prevBtn.addEventListener('click', prevSong);
+nextBtn.addEventListener('click', nextSong);
+audio.addEventListener('timeupdate', updateProgress);
+progressContainer.addEventListener('click', setProgress);
 
-.action-btn:hover { color: white; transform: scale(1.1); }
-.main-btn { font-size: 22px; color: var(--primary); font-weight: bold; }
-
-.volume-section {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-    font-size: 12px;
-    color: #b3b3b3;
-}
-
-#volume-slider {
-    accent-color: var(--primary);
-    cursor: pointer;
-}
+// Initialize
+loadSong(songs[songIndex]);
