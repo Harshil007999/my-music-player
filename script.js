@@ -8,7 +8,7 @@ const title = document.getElementById('title');
 const volumeSlider = document.getElementById('volume-slider');
 
 // Updated to match your EXACT filenames from the screenshot
-const songs = ['Music_Track_1', 'Music_Track_2', 'Music_Track_3']; 
+const songs = ['Music_Track_1', 'Music_Track_2', 'Music_Track_3'];
 let songIndex = 0;
 
 // Load song details
