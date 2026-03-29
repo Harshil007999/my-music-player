@@ -7,17 +7,18 @@ const progressContainer = document.getElementById('progress-container');
 const title = document.getElementById('title');
 const volumeSlider = document.getElementById('volume-slider');
 
-// 1. Song List - CHANGE THIS NAME to match your uploaded .mp3 file exactly!
-const songs = ['Music_Track_1']; 
+// Updated to match your EXACT filenames from the screenshot
+const songs = ['Music_Track_1', 'Music_Track_2', 'Music_Track_3']; 
 let songIndex = 0;
 
-// 2. Load the initial song
+// Load song details
 function loadSong(song) {
-    title.innerText = song;
+    // This removes the underscores for a cleaner title display (e.g. "Music Track 1")
+    title.innerText = song.replace(/_/g, ' '); 
     audio.src = `${song}.mp3`; 
 }
 
-// 3. Play/Pause Function
+// Play/Pause logic
 function togglePlay() {
     if (audio.paused) {
         audio.play();
@@ -28,29 +29,29 @@ function togglePlay() {
     }
 }
 
-// 4. Update Progress Bar
-function updateProgress(e) {
+// Update Progress Bar
+audio.addEventListener('timeupdate', (e) => {
     const { duration, currentTime } = e.srcElement;
     if (duration) {
         const progressPercent = (currentTime / duration) * 100;
         progress.style.width = `${progressPercent}%`;
     }
-}
+});
 
-// 5. Click on progress bar to skip
-function setProgress(e) {
-    const width = this.clientWidth;
+// Click on progress bar to skip
+progressContainer.addEventListener('click', (e) => {
+    const width = progressContainer.clientWidth;
     const clickX = e.offsetX;
     const duration = audio.duration;
     audio.currentTime = (clickX / width) * duration;
-}
+});
 
-// 6. Volume Control
+// Volume Control
 volumeSlider.addEventListener('input', (e) => {
     audio.volume = e.target.value / 100;
 });
 
-// 7. Navigation
+// Next Song
 function nextSong() {
     songIndex = (songIndex + 1) % songs.length;
     loadSong(songs[songIndex]);
@@ -58,6 +59,7 @@ function nextSong() {
     playBtn.innerText = 'Pause';
 }
 
+// Previous Song
 function prevSong() {
     songIndex = (songIndex - 1 + songs.length) % songs.length;
     loadSong(songs[songIndex]);
@@ -65,12 +67,13 @@ function prevSong() {
     playBtn.innerText = 'Pause';
 }
 
+// Automatically play next song when current one ends
+audio.addEventListener('ended', nextSong);
+
 // Event Listeners
 playBtn.addEventListener('click', togglePlay);
-prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
-audio.addEventListener('timeupdate', updateProgress);
-progressContainer.addEventListener('click', setProgress);
+prevBtn.addEventListener('click', prevSong);
 
-// Initialize
+// Initial Load
 loadSong(songs[songIndex]);
